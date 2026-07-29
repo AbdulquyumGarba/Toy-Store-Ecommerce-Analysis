@@ -11,7 +11,8 @@ select
 from Orders
 group by 1
 order by 2 desc;
- ## --Calculating the Average Difference between the start of Website_Session and Time Order was Placed
+ 
+--Calculating the Average Difference between the start of Website_Session and Time Order was Placed
 select RPAD(EXTRACT(month from AVG(AGE(od.created_at,ws.created_at)))::TEXt,7,' month') Average_Time_Difference 
 from Orders od 
 inner join Website_Session ws 
