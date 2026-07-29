@@ -1,31 +1,10 @@
-/*Order Table Objectives
-1. Total Amount of Order By Year,Month,Day,Hour
-2. Group Orders by website Sessions e.g (Join website table to know the difference between When the website sessin started to when Order was placed)
-	a. Group Orders by Device Category which Category is used for placing the most orders.
-	b. Which Order has the most Repating websute session
-3. Group User by Amount of Order Placed, Which User has the most Orders?, Which User Has the lowest Order,Dig deep into their Website session
-	a. What is the avg website_session for a user,Is here a correlation between Website session and Orders.
-4. What is the mpost Recurring Product in the Order, and what is the least recurring.
-	a. Group Product by Order_time(Created_at), what pattern can you find.
-	b. What is the most Paired Product
-	c. Group Products purchased by Year,Month,Day,Hour, is there a relationship?
-5. What is the avg amount of items purchased?, 
-	a. what is the Maximum and Minimum amount of Item purchased(show a break down of the order items) and group by Year,Month,Day,Hour
-	b. Does Number of items correlate with Website session? e.g Morning is always busier or not.
-	c. Does Number of Products Correlate with when the Order was placed.e.g Does Certain time pull in more items?
-6. What is the most expensive and cheap Product?
-	a. How frequently are they purchased By Year,Month,Day,Hour
-	b. What are they paired the most with
-	c. which order had the hghest and lowest price
-		i. what was the items purchased in there
-		ii. what is the average price for every order
-		iii. 
-7. Avg profit margin per order
-	a. Group profit margin By Year,Month,Day,hour*/
+-- Explore the Orders Table
 select * from Orders;
 
+--Count the Total Orders
 select COUNT(*) from Orders;
-<h1> --Amount of orders by year,month,day,Hour </h1>
+
+--Amount of orders by year,month,day,Hour 
 select 
 	TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/) as "Year",
 	COUNT(*) "Amount_Of_Orders" 
