@@ -128,3 +128,6 @@ select distinct(O.Order_id),
 inner join Orders O 
 using (Product_id)
 order by 3 desc;
+
+--Calculating the average Profit Margin 
+select ROUND(AVG(price-cogs),2) Avg_Profit_Margin from Orders;
