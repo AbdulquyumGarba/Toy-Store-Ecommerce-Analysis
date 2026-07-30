@@ -9,44 +9,51 @@ select * from Order_Item_Refund;
 --Total Amount Of Refunds
 select COUNT(Order_Item_refund_id) Total_Amount_Of_Refunds from Order_Item_Refund;
 
-with TB as (select TO_CHAR(created_at,'Day') "Year",
-	   COUNT(Order_Item_refund_id) Total_Amount_Of_Refunds 
+--Total Amount Of Refunds
+select COUNT(Order_Item_refund_id) Total_Amount_Of_Refunds from Order_Item_Refund;
+
+--Avg Refund Amount Per Year, Month,Day
+select 
+	TO_CHAR(created_at,'YYYY') "Year",
+	AVG(refund_amount) Average_Refund_Amount 
 from Order_Item_Refund
 group by 1
-order by 2 desc)
-select *,CUME_DIST() over (order by Total_Amount_Of_Refunds  desc),
-sum(Total_Amount_Of_Refunds) over (order by Total_Amount_Of_Refunds range between 16 preceding and current row),
-last_value(Total_Amount_Of_Refunds) over (order by Total_Amount_Of_Refunds ),
-Total_Amount_Of_Refunds- lead(Total_Amount_Of_Refunds) over(order by Total_Amount_Of_Refunds),
-ntile(6) over(),nth_value("Year",2) over(rows between 1 preceding and UNBOUNDED FOLLOWING ) from TB;
+order by 2 desc;
 
-CREATE TABLE sales(
-	year SMALLINT CHECK(year > 0),
-	group_id INT NOT NULL,
-	amount DECIMAL(10,2) NOT NULL,
-	PRIMARY KEY(year,group_id)
-);
-
-INSERT INTO
-	sales(year, group_id, amount)
-VALUES
-	(2018,1,1474),
-	(2018,2,1787),
-	(2018,3,1760),
-	(2019,1,1915),
-	(2019,2,1911),
-	(2019,3,1118),
-	(2020,1,1646),
-	(2020,2,1975),
-	(2020,3,1516);
-
-
-with salesp as (select year,SUM(amount) amount from sales
-group by 1
-order by 1)
+--Calculating Refund Rate/Product (RFP) 
+with RFP as (
+	select
+		p.product_name Product,
+		COUNT(oir.Order_Item_ID) Amount_Of_Refund
+	from order_item_refund oir
+	inner join order_item oi
+	USING(Order_ID)
+	inner join product p
+	Using(Product_ID)
+	group by 1
+	order by 2 desc
+)
 select 
-	year,
-	amount,
-	lead(amount) over (order by year asc) next_year_sales,
-	lead(amount) over (order by year asc)-amount variance 
-from salesp;
+	*,
+	CUME_DIST() over (order by Amount_Of_Refund) Distribution 
+from RFP ;
+
+--Average Predicted Amount of days for Refund
+select
+	EXTRACT(Days from AVG(O.created_at-oir.created_at)) Amount_Of_Refund
+from order_item_refund oir
+inner join orders o
+USING(Order_ID);
+
+--Calculating Year,Month,Day with the most refunds and Average Returns Per month
+with Monthly_Refunds/*(Yearly/Daily/Hourly)*/ as (
+		select 
+		 	TO_CHAR(created_at,'Month'/*('YYYY','Day','HH24')*/),
+			COUNT(order_item_refund_id ) Amount_Of_Refund
+		from order_item_refund 
+		group by 1
+		order by 2 desc
+)
+select 
+	ROUND(AVG(Amount_Of_Refund),0) AVg_Monthly_Refunds 
+from Monthly_Refunds /*(Yearly/Daily/Hourly)*/;
