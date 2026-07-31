@@ -1,4 +1,3 @@
---Exploring the Table
 select * from Product;
 
 --Amount of Products sold
