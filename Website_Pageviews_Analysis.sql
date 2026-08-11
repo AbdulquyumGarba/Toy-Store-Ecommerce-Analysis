@@ -26,7 +26,10 @@ select
 	MAX(Amount_of_view) over (partition by URL order by Amount_of_View desc) Max_Views 
 from TPURL 
 )
-select distinct(tl.URL),tl.Hourly,Max_Views
+select 
+	distinct(tl.URL),
+	tl.Hourly,
+	Max_Views
 from TPURL tl
 inner join
 MTPURL mtl
