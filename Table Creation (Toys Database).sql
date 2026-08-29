@@ -1,13 +1,17 @@
- create table Product 
+--Create Product Table
+create table Product 
  (Product_ID INT not null,Created_at TIMESTAMP not null,Product_Name VARCHAR(50),
  primary key(Product_ID));
- 
+
+
+-- Create Website_Session Table
 create table Website_Session
 (Website_Session_ID INT not NULL,Created_at TIMESTAMP not NULL,
 User_ID INT not null,Is_Repeat_Session smallint ,Utm_Source VARCHAR(30),
 Utm_Campaign VARCHAR(30),Utm_Content VARCHAR(30),Device_Type VARCHAR(30),
 Http_Referer VARCHAR(100),primary key(Website_Session_ID));
 
+-- Create Orders Table
 create table Orders 
 (Order_ID INT not NULL,Created_at TIMESTAMP not NULL, Website_Session_ID INT not NULL,
  User_ID INT not NULL,Product_ID INT not NULL,Items_Purchased INT,Price NUMERIC(5,2),
@@ -16,6 +20,7 @@ create table Orders
  foreign key(Website_Session_ID) references Website_session(Website_Session_ID) on delete CASCADE,
  foreign key(Product_ID) references Product(Product_ID) on delete cascade);
 
+-- Create Order_Item Table
 create table Order_Item
 (Order_Item_ID INT not null,Created_At TIMESTAMP not null,Order_Id INT,
 Product_ID INT not null,Is_Primary_Item smallint,Price NUmeric(5,2),
@@ -24,7 +29,7 @@ primary key(Order_Item_ID),
 foreign key(Product_ID) references Product(Product_ID) on delete CASCADE,
 foreign key(Order_ID) references "Order"(Order_ID) on delete cascade);
 
-
+-- Create Order_Item_Refund Table
 create table Order_Item_Refund
 (Order_Item_Refund_ID INT not null,Created_At TIMESTAMP not null ,Order_Item_ID INT,
 Order_ID INT not NULL,Refund_Amount DOUBLE precision,
