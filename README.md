@@ -15,4 +15,6 @@
    - [Website Session Analysis](https://github.com/AbdulquyumGarba/Toy-Store-Ecommerce-Analysis/blob/main/Website%20_Session_Analysis.sql)
    * [Website Pageviews](https://github.com/AbdulquyumGarba/Toy-Store-Ecommerce-Analysis/blob/main/Website_Pageviews_Analysis.sql)
 2. ERD Modelling
+   <img width="3000" height="754" alt="ERD" src="https://github.com/user-attachments/assets/246e6a13-8202-4a03-9c03-241ca6c8d6fd" />
+
 3. Data Visualization
