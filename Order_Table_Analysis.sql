@@ -6,7 +6,7 @@ select COUNT(*) from Orders;
 
 --Amount of orders by year,month,day,Hour 
 select 
-	TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/) as "Year",
+	RPAD(TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/),5,':00') as "Year",
 	COUNT(*) "Amount_Of_Orders" 
 from Orders
 group by 1
