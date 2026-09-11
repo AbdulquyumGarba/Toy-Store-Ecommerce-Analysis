@@ -18,3 +18,14 @@
    <img width="3000" height="754" alt="ERD" src="https://github.com/user-attachments/assets/246e6a13-8202-4a03-9c03-241ca6c8d6fd" />
 
 3. Data Visualization
+   - Amount Of Orders by Time Of Day
+   ```sql
+            select 
+            	RPAD(TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/),5,':00') as "Year",
+            	COUNT(*) "Amount_Of_Orders" 
+            from Orders
+            group by 1
+            order by 2 desc;
+<img width="1276" height="314" alt="Amount_Of_Orders_by_Time_Of_Day" src="https://github.com/user-attachments/assets/e367ad41-5602-4a7f-b23d-e6813dbecd10" />
+
+
