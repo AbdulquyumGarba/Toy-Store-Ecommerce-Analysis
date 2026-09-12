@@ -26,6 +26,7 @@
             from Orders
             group by 1
             order by 2 desc;
-<img width="1276" height="314" alt="Amount_Of_Orders_by_Time_Of_Day" src="https://github.com/user-attachments/assets/e367ad41-5602-4a7f-b23d-e6813dbecd10" />
+<img width="1276" height="314" alt="Amount_Of_Orders_By_Time_Visuals" src="https://github.com/user-attachments/assets/c13ec253-542b-4083-bbe0-6939005903ba" />
+
 
 
