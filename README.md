@@ -18,23 +18,32 @@
    <img width="3000" height="754" alt="ERD" src="https://github.com/user-attachments/assets/246e6a13-8202-4a03-9c03-241ca6c8d6fd" />
 
 3. Data Visualization
-- [x] Amount Of Orders by Time Of Day
+- [x] Numbers Of Orders by Time Of Day
+
+To evaluate the amount of order across all periods, I aggregated the number of orders and filtered it by hour, it could also be filtered by Month, Day, Year and even Quarters, you would need to switch the 'HH24' with the comments beside it. 
+   
    ```sql
-         select 
-            	RPAD(TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/),5,':00') as "Year",
-            	COUNT(*) "Amount_Of_Orders" 
-            from Orders
-            group by 1
-            order by 2 desc;
+   select 
+      RPAD(TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/),5,':00') as "Year",
+      COUNT(*) "Amount_Of_Orders" 
+   from Orders
+   group by 1
+   order by 2 desc;
    ```
+### Insights
+   * 
+   * 
+   *
+   *
+
 <img width="1276" height="314" alt="Amount_Of_Orders_By_Time_Visuals" src="https://github.com/user-attachments/assets/c13ec253-542b-4083-bbe0-6939005903ba" />
 
 - [x] Amount Of Refunds Per Year
 
 ```sql
 select 
-            TO_CHAR(created_at,'YYYY') "Year",
-         	COUNT(Order_Item_refund_id) Amount_Of_Refunds
+   TO_CHAR(created_at,'YYYY') "Year",
+   COUNT(Order_Item_refund_id) Amount_Of_Refunds
 from Order_Item_Refund
 group by 1
 order by 2 desc;
