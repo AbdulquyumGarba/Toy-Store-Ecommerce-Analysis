@@ -18,15 +18,29 @@
    <img width="3000" height="754" alt="ERD" src="https://github.com/user-attachments/assets/246e6a13-8202-4a03-9c03-241ca6c8d6fd" />
 
 3. Data Visualization
-   - Amount Of Orders by Time Of Day
+- [x] Amount Of Orders by Time Of Day
    ```sql
-            select 
+         select 
             	RPAD(TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/),5,':00') as "Year",
             	COUNT(*) "Amount_Of_Orders" 
             from Orders
             group by 1
             order by 2 desc;
+   ```
 <img width="1276" height="314" alt="Amount_Of_Orders_By_Time_Visuals" src="https://github.com/user-attachments/assets/c13ec253-542b-4083-bbe0-6939005903ba" />
+
+- [x] Amount Of Refunds Per Year
+
+```sql
+select 
+            TO_CHAR(created_at,'YYYY') "Year",
+         	COUNT(Order_Item_refund_id) Amount_Of_Refunds
+from Order_Item_Refund
+group by 1
+order by 2 desc;
+```
+<img width="1291" height="538" alt="Amount_Of_Refunds_Per_Year" src="https://github.com/user-attachments/assets/98b758ba-ecc4-4211-9e69-6e74b1989d83" />
+
 
 
 
