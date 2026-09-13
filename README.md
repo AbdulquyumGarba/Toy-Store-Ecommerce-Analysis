@@ -20,7 +20,7 @@
 3. Data Visualization
 - [x] Numbers Of Orders by Time Of Day
 
-To evaluate the amount of order across all periods, I aggregated the number of orders and filtered it by hour, it could also be filtered by Month, Day, Year and even Quarters, you would need to switch the 'HH24' with the comments beside it. 
+_<sub>To evaluate the amount of order across all periods, I aggregated the number of orders and filtered it by hour, it could also be filtered by Month, Day, Year and even Quarters, you would need to switch the 'HH24' with the comments beside it.</sub>_
    
    ```sql
    select 
@@ -39,6 +39,8 @@ To evaluate the amount of order across all periods, I aggregated the number of o
 <img width="1276" height="314" alt="Amount_Of_Orders_By_Time_Visuals" src="https://github.com/user-attachments/assets/c13ec253-542b-4083-bbe0-6939005903ba" />
 
 - [x] Amount Of Refunds Per Year
+
+_<sub>To calculate how well products performed, I queried for the amount of refunds across the years by aggregating the "Order_Item_Refund_id" and grouping by year, which gives us an overview of how well the department like Sales, Marketing Or even IT (if the products are not being well displayed on the website), further visualizations would be useful by providing insights into products and website activities</sub>_
 
 ```sql
 select 
