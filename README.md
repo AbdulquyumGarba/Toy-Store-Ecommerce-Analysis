@@ -54,7 +54,7 @@ order by 2 desc;
 
 - [x] Refund Rate per product
 
--<sub>dbjdn</sub>
+-<sub>In order to get drilled down insight of how well products are performing I calculated the refund rate by creating a CTE with an aggregation of distinct order_id and refund_id and further querying it to get a clearer picture</sub>
 
 ```sql
 with Refund_Rate as (
