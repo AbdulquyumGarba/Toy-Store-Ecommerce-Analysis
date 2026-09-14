@@ -20,13 +20,14 @@ from Order_Item_Refund
 group by 1
 order by 2 desc;
 
---Calculating Refund Rate/Product (RFP) 
+--Calculating Refund Amount/Product (RFP) 
 with RFP as (
 	select
 		p.product_name Product,
-		COUNT(oir.Order_Item_ID) Amount_Of_Refund
-	from order_item_refund oir
-	inner join order_item oi
+		count(distinct Order_ID),
+		COUNT(distinct oir.Order_Item_Refund_ID) Amount_Of_Refund
+	from Orders o
+	left join order_item_refund oir
 	USING(Order_ID)
 	inner join product p
 	Using(Product_ID)
@@ -57,3 +58,22 @@ with Monthly_Refunds/*(Yearly/Daily/Hourly)*/ as (
 select 
 	ROUND(AVG(Amount_Of_Refund),0) AVg_Monthly_Refunds 
 from Monthly_Refunds /*(Yearly/Daily/Hourly)*/;
+
+--Calculating Refund Rate/ Product
+with Refund_Rate as (
+select
+	product_name,
+	COUNT(distinct Order_Id) Amount_Of_Orders,
+	COUNT(distinct Order_Item_Refund_id) Amount_Of_Refunds 
+from orders o
+left join product p
+using(product_Id)
+left join Order_Item_Refund oir
+using(Order_id)
+group by 1
+order by 2 desc
+)
+	select 
+		product_name,
+		ROUND((Amount_Of_Refunds*100.0/Amount_Of_Orders),2) Refund_Rate
+	from Refund_Rate;
