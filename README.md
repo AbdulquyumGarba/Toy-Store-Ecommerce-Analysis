@@ -52,6 +52,30 @@ order by 2 desc;
 ```
 <img width="1291" height="538" alt="Amount_Of_Refunds_Per_Year" src="https://github.com/user-attachments/assets/98b758ba-ecc4-4211-9e69-6e74b1989d83" />
 
+- [x] Refund Rate per product
+
+-<sub>dbjdn</sub>
+
+```sql
+with Refund_Rate as (
+select
+	product_name,
+	COUNT(distinct Order_Id) Amount_Of_Orders,
+	COUNT(distinct Order_Item_Refund_id) Amount_Of_Refunds 
+from orders o
+left join product p
+using(product_Id)
+left join Order_Item_Refund oir
+using(Order_id)
+group by 1
+order by 2 desc
+)
+	select 
+		product_name,
+		ROUND((Amount_Of_Refunds*100.0/Amount_Of_Orders),2) Refund_Rate
+	from Refund_Rate;
+```
+<img width="1285" height="539" alt="Refund_Rate_Per_Product" src="https://github.com/user-attachments/assets/f0cbce67-31da-4cd4-a6ee-f05fcfcc3fc7" />
 
 
 
