@@ -60,7 +60,7 @@ select ROUND(AVG(case when Amount_Of_Order > 1 then 1 else 0 end)*100,2)  "Great
 	   ROUND(AVG(case when Amount_Of_Order = 1 then 1 else 0 end)*100,2)  "Equal_Avg_Items_Purchased",
 	   ROUND(AVG(case when Amount_Of_Order < 1 then 1 else 0 end)*100,2)  "Less_Avg_Items_Purchased" from Amount_Of_Order_User;
 
---Every Order Has only One product 'Boooooooooring'
+--Every Order Has only One product
 select user_id,
 	   ARRAY_AGG(p.product_name) 
 from Orders s 
