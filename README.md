@@ -7,6 +7,12 @@
 - Which Device People Place Order on Most
 - Refund Rate of Product
 - Calculating Number of Orders per Repeated Session
+#### Tools I used 
+PostgreSQL
+Tableau
+Excel: For Little little analysis and Visualization
+
+
 ## Stages of Project
 1. SQL Analysis
    - [Table Creation](https://github.com/AbdulquyumGarba/Toy-Store-Ecommerce-Analysis/blob/main/Table%20Creation%20(Toys%20Database).sql)
@@ -24,19 +30,15 @@ _<sub>To evaluate the amount of order across all periods, I aggregated the numbe
    
    ```sql
    select 
-      RPAD(TO_CHAR(created_at,'HH24'/*('Month'/'Day'/'YYYY'/'Q')*/),5,':00') as "Year",
+      TO_CHAR(created_at,'Month'/*('HH24'/'Day'/'YYYY'/'Q')*/) as "Month",
       COUNT(*) "Amount_Of_Orders" 
    from Orders
    group by 1
    order by 2 desc;
    ```
-### Insights
-   * 
-   * 
-   *
-   *
 
-<img width="1276" height="314" alt="Amount_Of_Orders_By_Time_Visuals" src="https://github.com/user-attachments/assets/c13ec253-542b-4083-bbe0-6939005903ba" />
+<img width="1321" height="468" alt="Amount_Of_Orders by Quarter_and_month" src="https://github.com/user-attachments/assets/1174fe44-feb2-49cb-bc90-62a95ff0f900" />
+
 
 - [x] Amount Of Refunds Per Year
 
@@ -54,7 +56,7 @@ order by 2 desc;
 
 - [x] Refund Rate per product
 
--<sub>In order to get drilled down insight of how well products are performing I calculated the refund rate by creating a CTE with an aggregation of distinct order_id and refund_id and further querying it to get a clearer picture</sub>
+-<sub>In order to get a drilled down insight of how well products are performing I calculated the refund rate by creating a CTE with an aggregation of distinct order_id and refund_id and further querying it to get a clearer picture</sub>
 
 ```sql
 with Refund_Rate as (
@@ -76,6 +78,22 @@ order by 2 desc
 	from Refund_Rate;
 ```
 <img width="1285" height="539" alt="Refund_Rate_Per_Product" src="https://github.com/user-attachments/assets/f0cbce67-31da-4cd4-a6ee-f05fcfcc3fc7" />
+
+- [x] Amount of Referrals by Source
+
+-<sub>In order to get a drilled down insight of how well products are performing I calculated the refund rate by creating a CTE with an aggregation of distinct order_id and refund_id and further querying it to get a clearer picture</sub>
+
+ ```sql
+   select 
+	ROUND(AVG(case when http_referer ilike '%www.gsearch%' then 1 else 0 end)*100) Goggle,
+	ROUND(AVG(case when http_referer ilike '%www.bsearch%' then 1 else 0 end)*100) Bing,
+	ROUND(AVG(case when http_referer ilike '%null%' then 1 else 0 end)*100) "Social Book",
+	ROUND(AVG(case when http_referer ilike '%www.socialbook%' then 1 else 0 end)*100) "Unknown"
+from website_session
+order by 2 desc
+```
+
+<img width="1300" height="700" alt="image" src="https://github.com/user-attachments/assets/089e817f-7d80-47a5-adff-35bc984b4bf2" />
 
 
 
