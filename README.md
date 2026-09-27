@@ -93,7 +93,22 @@ from website_session
 order by 2 desc
 ```
 
-<img width="1300" height="700" alt="image" src="https://github.com/user-attachments/assets/089e817f-7d80-47a5-adff-35bc984b4bf2" />
+<img width="674" height="345" alt="image" src="https://github.com/user-attachments/assets/59333fdb-3860-47de-afe0-5586e00b4e2f" />
+
+- [x] Sales Funnel: Home Page - Thank You Page
+
+-<sub>In order to get a drilled down insight of how well products are performing I calculated the refund rate by creating a CTE with an aggregation of distinct order_id and refund_id and further querying it to get a clearer picture</sub>
+
+ ```sql
+ select 
+	ROUND(AVG(case when pageview_url  ilike '%home%' then 1 else 0 end)*100,1) Home_page,
+	ROUND(AVG(case when pageview_url  ilike '%products%' then 1 else 0 end)*100,1) Product_page,
+	ROUND(AVG(case when pageview_url  ilike '%/cart%' then 1 else 0 end)*100,1) Cart_Page,
+	ROUND(AVG(case when pageview_url  ilike '%/billing%' then 1 else 0 end)*100,1) Billing_Page,
+	ROUND(AVG(case when pageview_url  ilike '%shipping%' then 1 else 0 end)*100,1) Shipping_Page,
+	ROUND(AVG(case when pageview_url  ilike '%thank-you-for-your-order%' then 1 else 0 end)*100,1) Thank_you_Page
+from website_pageviews;
+```
 
 
 
