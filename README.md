@@ -36,6 +36,9 @@ _<sub>To evaluate the amount of order across all periods, I aggregated the numbe
    group by 1
    order by 2 desc;
    ```
+Here's the breakdown of the Amount of Orders by Month:
+- **Quarters:** Top 5 Highest orders are in 1st and 2nd Quarter, indicating that demand of toys are much higher in those months (January, February, March, April, May).
+- **Low Orders:** Months that are in the 4th Quarters have the lowest orders, indicating that during the winter season orders are always low starting from August, since the end of August usually marks as the start of winter.
 
 <img width="1321" height="468" alt="Amount_Of_Orders by Quarter_and_month" src="https://github.com/user-attachments/assets/1174fe44-feb2-49cb-bc90-62a95ff0f900" />
 
@@ -52,6 +55,7 @@ from Order_Item_Refund
 group by 1
 order by 2 desc;
 ```
+  
 <img width="1291" height="538" alt="Amount_Of_Refunds_Per_Year" src="https://github.com/user-attachments/assets/98b758ba-ecc4-4211-9e69-6e74b1989d83" />
 
 - [x] Refund Rate per product
