@@ -109,6 +109,8 @@ order by 2 desc
 	ROUND(AVG(case when pageview_url  ilike '%thank-you-for-your-order%' then 1 else 0 end)*100,1) Thank_you_Page
 from website_pageviews;
 ```
+<img width="591" height="402" alt="image" src="https://github.com/user-attachments/assets/8550aedf-2893-49f3-ade5-b2a77250617a" />
+
 
 
 
